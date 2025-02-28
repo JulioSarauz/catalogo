@@ -1,7 +1,10 @@
 eureka:
   instance:
-    preferIpAddress:false
-    non-secure-port-enable: true
-    secure-port-enabled:false
-    non-secure-port: ${server.port}
-    secure-port:443
+    preferIpAddress: false  # No usar la IP privada
+    hostname: ${RAILWAY_PUBLIC_DOMAIN}  # Usa el dominio público de Railway
+    secure-port-enabled: true
+    non-secure-port-enabled: false
+    secure-port: 443
+    statusPageUrl: https://${RAILWAY_PUBLIC_DOMAIN}/actuator/info
+    healthCheckUrl: https://${RAILWAY_PUBLIC_DOMAIN}/actuator/health
+    homePageUrl: https://${RAILWAY_PUBLIC_DOMAIN}/
