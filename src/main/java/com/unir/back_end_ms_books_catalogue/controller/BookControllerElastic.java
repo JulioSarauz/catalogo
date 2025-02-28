@@ -18,7 +18,7 @@ import java.util.List;
 public class BookControllerElastic {
     private final BookServiceElastic service;
 
-    @GetMapping("/bookelastic")
+    @GetMapping("/publications")
     public ResponseEntity<BooksQueryResponse> getBooks(
             @RequestParam(required = false) List<String> categoryValues,
             @RequestParam(required = false) List<String> authorValues,
@@ -35,8 +35,7 @@ public class BookControllerElastic {
                 publicationDateValues,
                 ratingValues,
                 title,
-                page); // Eliminamos el parámetro address
+                page);
         return ResponseEntity.ok(response);
     }
-
 }

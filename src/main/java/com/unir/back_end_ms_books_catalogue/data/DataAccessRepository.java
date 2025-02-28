@@ -49,17 +49,28 @@ public class DataAccessRepository {
             BoolQueryBuilder querySpec = QueryBuilders.boolQuery();
 
             // Filtrar por autor
+            /*
             if (authorValues != null && !authorValues.isEmpty()) {
                 authorValues.forEach(
                         author -> querySpec.must(QueryBuilders.termQuery("author.keyword", author))
                 );
-            }
+            }*/
 
-            // Filtrar por categoría
+            // Filtrar por categoría term query
             if (categoryValues != null && !categoryValues.isEmpty()) {
                 categoryValues.forEach(
-                        category -> querySpec.must(QueryBuilders.termQuery("category.keyword", category))
+                        category -> querySpec.must(QueryBuilders.termQuery("category_id", Long.parseLong(category)))
                 );
+            }
+
+            // Match Query (Búsqueda analizada)
+            if (title != null) {
+                querySpec.must(QueryBuilders.matchQuery("title", title));
+            }
+
+            //Multi Mattch Query
+            if (authorValues != null && !authorValues.isEmpty()) {
+                querySpec.must(QueryBuilders.multiMatchQuery(String.join(" ", authorValues), "author", "isbn"));
             }
 
             // Filtrar por ISBN

@@ -22,7 +22,9 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URL:https://eureka-production-637b.up.railway.app/eureka}
+      defaultZone: ${EUREKA_URL:https://eureka-production-637b.up.railway.app/eureka} #RAILWAY
+      #defaultZone: ${EUREKA_URL:http://172.17.0.2:8761/eureka}                       #DOCKER LOCAL
+      #defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}                        #LOCAL
   instance:
     preferIpAddress: true
     hostname: ms-books-catalogue
