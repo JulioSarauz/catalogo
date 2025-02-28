@@ -37,6 +37,7 @@ public class DataAccessRepository {
 
     @SneakyThrows
     public BooksQueryResponse findBooks(
+            String idValue,
             List<String> categoryValues,
             List<String> authorValues,
             List<String> isbnValues,
@@ -47,7 +48,9 @@ public class DataAccessRepository {
 
         try {
             BoolQueryBuilder querySpec = QueryBuilders.boolQuery();
-
+            if (idValue != null) {
+                querySpec.must(QueryBuilders.matchQuery("_id", idValue));
+            }
             // Filtrar por autor
             /*
             if (authorValues != null && !authorValues.isEmpty()) {
@@ -76,7 +79,7 @@ public class DataAccessRepository {
             // Filtrar por ISBN
             if (isbnValues != null && !isbnValues.isEmpty()) {
                 isbnValues.forEach(
-                        isbn -> querySpec.must(QueryBuilders.termQuery("isbn.keyword", isbn))
+                        isbn -> querySpec.must(QueryBuilders.termQuery("isbn", isbn))
                 );
             }
 

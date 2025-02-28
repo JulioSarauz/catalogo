@@ -20,6 +20,7 @@ public class BookControllerElastic {
 
     @GetMapping("/publications")
     public ResponseEntity<BooksQueryResponse> getBooks(
+            @RequestParam(required = false) String idValue,
             @RequestParam(required = false) List<String> categoryValues,
             @RequestParam(required = false) List<String> authorValues,
             @RequestParam(required = false) List<String> isbnValues,
@@ -29,6 +30,7 @@ public class BookControllerElastic {
             @RequestParam(required = false, defaultValue = "0") String page) {
 
         BooksQueryResponse response = service.getBooks(
+                idValue,
                 categoryValues,
                 authorValues,
                 isbnValues,

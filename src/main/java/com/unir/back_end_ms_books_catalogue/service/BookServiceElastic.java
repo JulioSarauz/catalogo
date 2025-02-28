@@ -15,6 +15,7 @@ public class BookServiceElastic {
     private final DataAccessRepository repository;
 
     public BooksQueryResponse getBooks(
+            String idValue,
             List<String> categoryValues,
             List<String> authorValues,
             List<String> isbnValues,
@@ -23,6 +24,7 @@ public class BookServiceElastic {
             String title,
             String page) {
         return repository.findBooks(
+                idValue,
                 categoryValues,
                 authorValues,
                 isbnValues,
