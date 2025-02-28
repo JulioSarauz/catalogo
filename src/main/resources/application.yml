@@ -18,7 +18,20 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
-
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"  # O "*" si no hay credenciales
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
 ## Configuracion del cliente de Eureka
 eureka:
   client:
@@ -35,6 +48,8 @@ eureka:
     statusPageUrl: https://${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app}/actuator/info
     healthCheckUrl: https://${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app}/actuator/health
     homePageUrl: https://${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app}/
+
+
 
 ##Elasticsearch config
 elasticsearch:
