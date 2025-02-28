@@ -18,6 +18,7 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
+
 ## Configuracion del cliente de Eureka
 eureka:
   client:
@@ -26,8 +27,14 @@ eureka:
       #defaultZone: ${EUREKA_URL:http://172.17.0.2:8761/eureka}                       #DOCKER LOCAL
       #defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}                        #LOCAL
   instance:
-    preferIpAddress: true
-    hostname: ms-books-catalogue
+    preferIpAddress: false  # No usar la IP privada
+    hostname: ${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app} # Usar el dominio público de Railway
+    secure-port-enabled: true  # Habilitar el puerto seguro
+    non-secure-port-enabled: false  # Deshabilitar el puerto no seguro
+    secure-port: 443  # Puerto seguro (HTTPS)
+    statusPageUrl: https://${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app}/actuator/info
+    healthCheckUrl: https://${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app}/actuator/health
+    homePageUrl: https://${RAILWAY_PUBLIC_DOMAIN:back-end-ms-books-catalogue.up.railway.app}/
 
 ##Elasticsearch config
 elasticsearch:
@@ -35,6 +42,7 @@ elasticsearch:
   credentials:
     user: ${ELASTICSEARCH_USER:b99laoc4p7}
     password: ${ELASTICSEARCH_PWD:9hjczl71x6}
+
 logging:
   level:
     tracer: TRACE
