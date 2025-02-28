@@ -1,0 +1,6 @@
+{ "index": { "_index": "categories", "_id": 1 } }
+{ "category": "Programación" }
+{ "index": { "_index": "categories", "_id": 2 } }
+{ "category": "Ficción" }
+{ "index": { "_index": "categories", "_id": 3 } }
+{ "category": "Historia" }
